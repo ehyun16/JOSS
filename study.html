@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+		<title>study</title>
+<style>
+    body{margin:0;}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+    span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+        margin:10px;
+    }
+    .name-box{
+        background-color:#F9DDD1;
+        width:100%;
+        height:100px;
+    }
+    .chat{
+        margin-left: 106%;
+    }
+    .board{
+        width:100%;
+        height:40px;
+        border:solid 5px #EFB9A7;
+        border-left: 0;
+        border-right: 0;
+    }
+     .write{
+         float:right;
+       /** background-color: #F9DDD1;
+        width:70px;
+        height:35px;
+
+        margin:3px;
+        text-align: center;
+        border-radius: 1em;
+        margin-right: 15px;**/
+    }
+     .backsavebtn{
+
+        width:100%;
+        height:45px;
+        border:solid 5px #FAE0D4;
+        border-left: 0;
+        border-right: 0;
+
+    }
+    .photo{
+        width:100%;
+        height:180px;
+        position: relative;
+    }
+    .show-name{
+      width:90%;
+      height:20px;
+      border:solid 5px #DB9D7A;
+      margin-left: 10px;
+      margin-right: 20px;
+      padding-bottom:30px;
+        background-color: whitesmoke;
+    }
+    #info {
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    }
+</style>
+<script>
+  $(document).ready(function(){
+  var study_id=localStorage.getItem('study_id');
+  $.ajax({
+    url:'http://localhost:3000/study/detail?id='+study_id,
+    type:'GET',
+    processData: false,
+    success:function(data){
+      $('#title').text(data.title);
+      $('#category').text(data.category);
+      $('#region').text(data.region);
+      $('#place').text(data.place);
+    }
+  })
+  return false;
+})
+</script>
+</head>
+<body>
+<br>
+<br>
+<div class="backsavebtn">
+<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h3 class="ui-title" role="heading" aria-level="1"><span id="title" style="font-size: 20px; color:#DB9D7A"></span></h3>
+    <button type="button" onclick="history.back();"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>
+    <button type="button" onclick="location.href='chatting.html'"><span style="font-size:16px; color:#DB9D7A">채팅</span></button>
+   </div>
+    </div>
+
+<div class="photo">
+  <img src='img/inside.jpg' style="width:100%; height:100%">
+   <center id="info">#<span id="category"></span>
+     #<span id="region"></span>#<span id="place"></span></center>
+</div>
+
+<div class="name-box">
+    <span style="color:#8B4B46">참여회원</span>
+    <div class="show-name"></div>
+    </div>
+
+
+
+    <span style="color:#8B4B46">공지사항</span>
+<br>
+<br>
+<br>
+<br>
+<div class="board">
+    <span style="color:#8B4B46">전체글</span>
+     <!-- 이미지 버튼 삽입하기-->
+      <!--아이콘을 버튼으로 만들자-->
+
+
+    <!--<img src="images/main/btn_event_prev.gif" alt="이전 이벤트 보기" onclick="alert('이전');"/>-->
+
+
+   <!-- <div class="write">
+        <!--<i class="far fa-edit fa-2x"></i>-->
+        <!--<button type="button" onclick="location.href='write.html'"><span style="font-size:16px; color:#DB9D7A">채팅</span></button>-->
+  <!--  </div>-->
+
+    <div class="write">
+        <!--<i class="far fa-edit fa-2x"></i>-->
+        <input type="image" src="img/writebtn.png" onclick="location.href='write.html'" data-role="button">
+    </div>
+</div>
+
+    <!-- <div data-role="content" data-id="footerid1" data-position="fixed">
+      <div data-role="navbar" >
+         <ul>
+            <li><a onclick="location.href='study_notice.html'" class="ui-btn-active ui-state-persist "><span style="color:#8B4B46">전체글</span></a></li>
+            <li><a onclick="location.href='study.html'"><span style="color:#8B4B46">공지사항</span></a></li>
+         </ul>
+      </div>
+   </div>-->
+
+
+
+
+  <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+
+
+
+    </body>
+</html>

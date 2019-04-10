@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+  <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>회원가입</title>
+
+    <style>
+            .jb-wrap {
+                margin: 10px auto;
+                position:relative;
+            }
+            .jb-wrap img {
+                width: 100%;
+                height: 100%;
+                vertical-align: middle;
+            }
+            .jb-box {
+                text-align: center;
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                transform: translate( -50%, -50% );
+            }
+             .jb-logo{
+                width:20%;
+                height:20%;
+                margin-left:10px;
+                margin-top: 110px;
+                vertical-align:middle;
+            }
+        .form-label-group{
+            padding:3px;
+
+        }
+        .box{
+            background-color:#F9DDD1;
+            padding:20px;
+            margin:10px;
+            width:250px;
+        }
+
+        </style>
+        <script type="text/javascript">
+
+        $(document).ready(function(){
+        $("#uid").blur(function(){
+          var uid=$('#uid').val();
+          if(!uid){
+            $("#id_check").text("아이디를 입력하세요");
+            $("#id_check").css('color', 'red');
+          }
+          else{
+          $.ajax({
+            url:'http://localhost:3000/register/checkid?id='+uid,
+            type:'GET',
+            async: false,
+            processData: false,
+            success:function(data){
+              if(data == 'true'){
+                $("#id_check").text("사용중인 아이디");
+                $("#id_check").css('color', 'red');
+                return false;
+              }
+              else if(data == 'false'){
+                  $("#id_check").text("사용가능 아이디");
+                  $("#id_check").css('color', 'blue');
+                  return false;
+                }
+              }
+            });
+            return false;
+          }
+
+        });
+        });
+
+
+    $(function(){
+    $('#reg_submit').on('click', function(){
+
+      var uid=$('#uid').val();
+      var pass1=$('#pass1').val();
+      var pass2=$('#pass2').val();
+      var nickname=$('#nickname').val();
+      var email=$('#email').val();
+      var university=$('#university').val();
+
+      if(uid==''|pass1==''|pass2==''|nickname==''|email==''|university==''){
+        $("#reg_check").text("모든 항목을 정확히 입력해주세요");
+        $("#reg_check").css('color', 'red');
+      }else if(pass1!=pass2){
+        $("#reg_check").text("비밀번호가 일치하지 않습니다");
+        $("#reg_check").css('color', 'red');
+      }else if(pass1==pass2){
+      $.ajax({
+        url:'http://localhost:3000/register',
+        type:'POST',
+        data: {uid: uid, pass1: pass1, pass2: pass2, nickname: nickname, email: email, university: university},
+        dataType: 'text',
+        success:function(data){
+          if(data=='success'){
+          alert('회원가입 완료!');
+          window.location.href = 'login.html';
+        }else if(data=='fail'){
+          alert('이미 사용중인 아이디입니다')
+          //window.location.href = 'register.html';
+        }
+        }
+      })
+      return false;
+  }
+  })
+})
+  </script>
+  </head>
+  <body style="background-color:#EFB9A7">
+     <div class="jb-wrap">
+     <div class="jb-image"><img src="img/main.png" alt=""></div>
+     <div class="jb-box">
+         <center><div class="jb-logo"><img src="img/logo2.png" alt=""></div></center><br>
+              <span style="font-size: 30px; color:white"><center>회원 가입</center></span><hr>
+            <div class="box" align="center" style="border-radius:2em;">
+            <span style="font-size:15px; color:#8B4B46;"><center>기본 입력 사항</center></span>
+
+            <form onsubmit="return false;">
+            <div class="form-label-group">
+            <input type="text" name="uid" id="uid" class="form-control" placeholder="ID" required autofocus>
+            </div>
+            <div id="id_check" style="font-size:12px;"></div>
+            <div class="form-label-group">
+              <input type="password" name="pass1" id="pass1" class="form-control" placeholder="PW" >
+            </div>
+            <div class="form-label-group">
+            <input type="password" name="pass2" id="pass2" class="form-control" placeholder="PW 확인">
+            </div>
+            <div class="form-label-group">
+              <input type="text" name="nickname" id="nickname" class="form-control" placeholder="이름">
+            </div>
+            <div class="form-label-group">
+              <input type="email" name="email" id="email" class="form-control" placeholder="메일 주소">
+            </div>
+            <div class="form-label-group">
+              <input type="text" name="university" id="university" class="form-control" placeholder="대학명">
+            </div>
+            <div id="reg_check" style="font-size:12px;"></div>
+            <hr>
+           <div class="form-label-group">
+            <input type="button" id="reg_submit" style="color: #fff; background:#8B4B46; font-size:16px; border-radius:0.5em; padding:1px 70px;" value="COMPLETE">
+            </div>
+          </form>
+          <center>
+        </center>
+          </div>
+         </div>
+         </div>
+    </div>
+</body>
+</html>

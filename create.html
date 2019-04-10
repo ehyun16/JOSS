@@ -1,0 +1,190 @@
+<!--스터디 개설화면-->
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+    <title>main</title>
+<style type=text/css>
+    body{margin:0;}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #EFB9A7;
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+li {
+    float: right;
+    margin:10px;
+    width:18.5%;
+}
+
+li a {
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+
+ ul > li.active > a{
+  color: #2F4F4F;
+ }
+
+ slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  width: 100%; /* Full-width */
+  height: 10px; /* Specified height */
+  border-radius: 5px;
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #EFB9A7; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #EFB9A7; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+</style>
+<script>
+$(document).ready(function(){
+  var Btn = $("#nav > li");
+  Btn.click(function(){
+  Btn.removeClass("active");
+   $(this).addClass("active");
+  })
+})
+
+$(document).ready(function(){
+  var tok=localStorage.getItem('token');
+  $('#create').on('click', function(){
+    var title=$('#title').val();
+    var category=$('#category').val();
+    var region=$('#region').val();
+    var place=$('#place').val();
+    var max=$('#max').val();
+    var text=$('#text').val();
+
+    if(title==''|place==''|text==''){
+      $("#create_check").text("모든 항목을 입력해주세요");
+      $("#create_check").css('color', 'red');
+    }else{
+      $.ajax({
+        url:'http://localhost:3000/study',
+        type:'POST',
+        data: {title: title, category: category, region: region, place: place, max: max, text: text},
+        headers: {'authorization': tok},
+        success:function(data){
+          if(data=='success'){
+            alert('스터디 생성 완료')
+            window.location.href = 'home.html';
+          }
+        }
+      })
+      return false;
+    }
+  })
+})
+</script>
+</head>
+<body>
+<br><br>
+  <div style="margin: 0px 40px">
+    <div style="color:#8B4B46; font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin-top: 10px; margin-bottom: 5px;">
+      스터디 만들기
+    <input style="float: right" class="btn btn-outline-info" type=button value="닫기" onClick="history.back();">
+  </div><hr>
+    <form method="post">
+            <label style="font-family: 'Do Hyeon', sans-serif;">스터디명</label><br>
+            <input type="text" class="form-control form-control-sm" name="title" id="title" required autofocus><br>
+            <label style="font-family: 'Do Hyeon', sans-serif;">카테고리</label><br>
+            <select id="category" class="custom-select">
+  	<option value="어학">어학</option>
+    <option value="자격증">자격증</option>
+    <option value="취업">취업</option>
+    <option value="고시">고시</option>
+    <option value="프로그래밍">프로그래밍</option>
+    <option value="공모전">공모전</option>
+    <option value="기타">기타</option>
+  </select><br><br>
+            <label style="font-family: 'Do Hyeon', sans-serif;">희망 지역</label><br>
+            <select id="region" class="custom-select">
+  	<option value="서울">서울</option>
+    <option value="인천">인천</option>
+    <option value="경기">경기</option>
+    <option value="대전">대전</option>
+    <option value="대구">대구</option>
+    <option value="부산">부산</option>
+    <option value="기타">기타</option>
+  </select><br><br>
+            <label style="font-family: 'Do Hyeon', sans-serif;">장소</label><br>
+            <input type="text" class="form-control form-control-sm" name="place" id="place" placeholder="ex) 신촌, 충무로" equired autofocus><br>
+            <label style="font-family: 'Do Hyeon', sans-serif;">희망 최대 인원</label>
+            <div class="slidecontainer">
+              <input type="range" min="1" max="20" value="5" class="slider" id="max">Value: <span id="demo"></span>
+            </div><br>
+            <label style="font-family: 'Do Hyeon', sans-serif;">게시글 내용</label><br>
+            <textarea name="text" class="form-control form-control-sm" id="text" rows="4" cols="25"></textarea><br>
+            <label style="font-family: 'Do Hyeon', sans-serif;">썸네일 사진 첨부</label><br>
+
+      </form>
+        <div id="create_check" style="font-size:12px;"></div>
+      <br>
+<button id="create" type="button" class="btn btn-outline-info btn-block">완 료</button>
+<br><br>
+  </div>
+
+  <div class="box">
+  <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+  <script>
+  var slider = document.getElementById("max");
+  var output = document.getElementById("demo");
+  output.innerHTML = slider.value; // Display the default slider value
+
+  // Update the current slider value (each time you drag the slider handle)
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+  }
+  </script>
+    </body>
+</html>

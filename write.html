@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
+   <!--예제-->
+
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+      <title>set</title>
+<style>
+    body{margin:0;}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #EFB9A7;
+    position:fixed;
+    bottom:0;
+    width:100%;
+
+}
+
+li {
+    margin:10px;
+    float: right;
+    width:18%;
+}
+
+li a {
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+
+li a:hover {
+  background-color: #F9DDD1;
+
+}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+    span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+    }
+    .name-box{
+        background-color: #FAE0D4;
+        width:80%;
+        height:70px;
+
+    }
+    .chat{
+        background-color: #F9DDD1;
+        width:100px;
+        height:53px;
+        float:right;
+        margin:10px;
+        text-align: center;
+        padding-top: 7px;
+        border-radius: 1.5em;
+        margin-right: 15px;
+    }
+    .board{
+        width:100%;
+        height:40px;
+        border:solid 5px #EFB9A7;
+        border-left: 0;
+        border-right: 0;
+    }
+    .write{
+        background-color: #F9DDD1;
+        width:40px;
+        height:30px;
+        float:right;
+        margin:5px;
+        text-align: center;
+        border-radius: 1em;
+        margin-right: 15px;
+    }
+    .backsavebtn{
+
+        width:width:100%;
+        height:45px;
+
+
+        border:solid 5px #FAE0D4;
+        border-left: 0;
+        border-right: 0;
+
+    }
+      a.ui-link{
+       color: white;
+    }
+
+</style>
+</head>
+<body>
+<br>
+<br>
+
+
+<!-- a 태그 버튼 -->
+
+<div class="backsavebtn">
+<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h3 class="ui-title" role="heading" aria-level="1"><span style="font-size: 20px; color:#DB9D7A">게시글 등록</span></h3>
+    <!--<button type="button" onclick="location.href='home.html'"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>-->
+      <a href="#" class="ui-link ui-btn-right ui-btn ui-shadow ui-corner-all" data-role="button" role="button">
+          <span style="font-size:17px; color:#DB9D7A">등록</span></a>
+   </div>
+    </div>
+
+<!--
+<div data-role="content" data-id="footerid1" data-position="fixed">
+      <div data-role="navbar" >
+         <ul>
+            <li><a onclick="location.href='setting2.html'"><span>회원관리</span></a></li>
+            <li><a onclick="location.href='setting.html'"class="ui-btn-active ui-state-persist"><span>기본관리</span></a></li>
+         </ul>
+      </div>
+   </div>-->
+
+
+<fieldset>
+  <br>
+            <table>
+               <tr>
+                        <td><label for="s_id"><span>&nbsp제&nbsp목 : </span></label></td>
+                  <td><input type="text" name="s_id" id="s_id" disabled data-role="none"/></td>
+                    </tr>
+            </table>
+           
+
+     <span><span>&nbsp;게시판: </span></span><select data-role="none">
+        <option value="language"><span>&nbsp;자유게시판</span></option>
+        <option value="programming"><span>&nbsp;공지사항</span></option>
+         </select><br/>
+
+            <form action="" method="post" enctype="multipart/form-data" name="">
+                <input type="file" name="FileName">
+            </form>
+  <hr>
+   
+<!--
+    <span><span>&nbsp카테고리 : </span></span><select data-role="none">
+        <option value="language"><span>&nbsp언어</span></option>
+        <option value="programming"><span>&nbsp프로그래밍</span></option>
+        <option value="test"><span>&nbsp시험</span></option>
+            </select><br/>
+
+            <span>&nbsp희망지역 : </span><select data-role="none">
+            <option value="seoul">서울</option>
+            <option value="gyeonggi">경기</option>
+            </select><br/>
+
+            <span>&nbsp;희망 최대 인원 : </span><input type="number" name="s_year" min="1" max="100" value="3" data-role="none"/>
+                <div data-role="fieldcontain">
+                <hr>
+
+    ---------------------------------------->
+    <span>&nbsp; 내&nbsp;용 </span>
+             
+                 <textarea cols="25" rows="5" id="txtarea1"></textarea>
+                 
+    </fieldset>
+
+
+<ul id="nav">
+    <li><a onclick="location.href='setting.html'" ><i class="far fa-user fa-2x"></i></a></li>
+    <li><a   class="active"  onclick="location.href='write.html'"><i class="fas fa-plus-circle fa-2x"></i></a></li>
+    <li><a onclick="location.href='search.html'"><i class="fas fa-search fa-2x"></i></a></li>
+    <li><a onclick="location.href='home.html'"><i class="fas fa-home fa-2x"></i></a></li>
+</ul>
+
+  <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+
+
+
+    </body>
+</html>

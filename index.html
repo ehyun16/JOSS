@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+  <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<title>JOSS</title>
+		<style>
+    .jb-wrap {
+   margin: 10px auto;
+   position:relative;
+}
+.jb-wrap img {
+   width: 100%;
+   height: 100%;
+   vertical-align: middle;
+}
+.jb-box {
+   text-align: center;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate( -50%, -50% );
+}
+.jb-logo{
+   width:60%;
+   height:60%;
+   margin-left:50px;
+   margin-bottom: 30px;
+   vertical-align:middle;
+}
+.back{
+  padding:20px;
+  margin:10px;
+  width:250px;
+  background-color:#F9DDD1 ;
+}
+
+A:link {text-decoration:none}
+A:visited {text-decoration:none}
+A:hover {text-decoration:none}
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function(){
+              $('#log_submit').on('click', function(){
+                var uid=$('#uid').val();
+                var pass=$('#pass').val();
+                if(uid!=''&&pass!==''){
+                $.ajax({
+                  url:'http://localhost:3000/login',
+                  type:'POST',
+                  dataType: 'json',
+                  data: {uid: uid, pass: pass},
+                  success:function(data){
+                      if(data.success==true){
+                        //window.localStorage.setItem("loggedIn", 1);
+                        localStorage.setItem("token", data.token);
+                        window.location.href = 'home.html';
+                      }else {
+                        alert('로그인 실패');
+                      }
+                  }
+                })
+                return false;
+              }
+            })
+          })
+
+
+        </script>
+        </head>
+        <body style="background-color:#EFB9A7">
+        <div class="jb-wrap">
+          <div class="jb-image"><img src="img/main.png" alt=""></div>
+			<center>
+			<div class="jb-box">
+				<div class="jb-logo"><img src="img/logo.png" alt=""></div>
+				<div class="back" align="center" style="border-radius:2em;">
+
+				<form method="post">
+                <label style="font-family: 'Do Hyeon', sans-serif;">I D : </label><input type="text" name="uid" id="uid"  placeholder="ID" required autofocus><br><br>
+
+                <label style="font-family: 'Do Hyeon', sans-serif;">PW: </label><input type="password" name="pass" id="pass"  placeholder="PW" required><br><br>
+
+                <input type="button" id="log_submit" style="color: #fff; background:#8B4B46; font-size:16px; border-radius:0.5em; padding:1px 70px;font-family: 'Do Hyeon', sans-serif;" value="L O G I N">
+                    <hr>
+
+            <a href="id.html" style="font-size:12px;">ID 찾기 / </a>
+            <a href="password.html" style="font-size:12px;">비밀번호 찾기 / </a>
+            <a href="register.html"  style="font-size:12px;">회원가입</a>
+          </form>
+
+			</div>
+		</div>
+            </center>
+            </div>
+	</body>
+</html>

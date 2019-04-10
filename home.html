@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+		<title>main</title>
+<style type=text/css>
+    body{margin:0;}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #EFB9A7;
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+li {
+    float: right;
+    margin:10px;
+    width:18.5%;
+}
+
+li a {
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+
+    span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    #nav{
+      height: 50px;
+    }
+
+
+/*    .content{
+      top:45px;
+      width:100%;
+      position:fixed;
+      width:100%;
+    }
+*/
+ ul > li.active >a {
+  color: #2F4F4F;
+ }
+
+ .backsavebtn{
+
+     width:100%;
+     height:45px;
+
+
+     border:solid 5px #FAE0D4;
+     border-left: 0;
+     border-right: 0;
+
+ }
+ ul > li.active > a.ui-link{
+color: #2F4F4F;
+}
+ a.ui-link{
+  color: white;
+}
+
+#table{
+  margin-bottom: 50px;
+}
+
+</style>
+
+
+<script>
+ $(function(){
+  var sBtn = $("ul > li");
+  sBtn.find("a").click(function(){
+   sBtn.removeClass("active");
+   $(this).parent().addClass("active");
+  })
+ })
+
+ $(document).ready(function(){
+ var tok=localStorage.getItem('token');
+   $.ajax({
+     url:'http://localhost:3000/study/mine',
+     type:'GET',
+     dataType: 'json',
+     headers: {'authorization': tok},
+     success:function(result){
+       if(result.success==false){
+         $("#table").append("<center style='font-size:12px;'>개설한 스터디가 없습니다.</center>");
+       }
+       else{
+         for(var k in result.data){
+         $("#table").append(
+           "<tr id='"+result.data[k].study_id+"'><td><img src='img/logo2.png' class='rounded float-left'></td><td><dt>"+result.data[k].title
+           +"</dt>카테고리: "+result.data[k].category
+           +"<br>장소: "+result.data[k].place+"</td></tr>");
+         }
+       }
+     }
+   })
+   return false;
+ })
+
+ $(document).ready(function (){
+      $("#table").on("click","tr", function() {
+      localStorage.setItem("study_id", $(this).attr('id'));
+      window.location.href = 'study.html';
+    });
+});
+</script>
+
+</head>
+<body>
+<br>
+<br>
+<br>
+<span style="color:#8B4B46">내가 참여한 스터디</span><hr>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<span style="color:#8B4B46">내가 만든 스터디</span><hr>
+<table class="table" id="table">
+</table>
+
+ <ul id="nav">
+    <li><a href="mypage.html"><i class="far fa-user fa-2x"></i></a></li>
+    <li><a href="create.html"><i class="fas fa-plus-circle fa-2x" ></i></a></li>
+    <li><a href="search.html"><i class="fas fa-search fa-2x" ></i></a></li>
+    <li class="active"><a href="#home"><i class="fas fa-home fa-2x" ></i></a></li>
+</ul>
+
+  <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+
+    </body>
+</html>

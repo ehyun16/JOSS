@@ -1,0 +1,162 @@
+<!--마이페이지화면-->
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+    <title>main</title>
+<style type=text/css>
+    body{margin:0;}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #EFB9A7;
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+li {
+    float: right;
+    margin:10px;
+    width:18.5%;
+}
+
+li a {
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+
+    .content{
+      top:45px;
+      width:100%;
+      position:relative;
+    }
+
+ ul > li.active > a{
+  color: #2F4F4F;
+ }
+
+ #nav{
+   height: 50px;
+ }
+
+</style>
+<script>
+
+$(document).ready(function(){
+  var Btn = $("#nav > li");
+  Btn.click(function(){
+  Btn.removeClass("active");
+   $(this).addClass("active");
+  })
+})
+
+$(function(){
+var tok=localStorage.getItem('token');
+  $.ajax({
+    url:'http://localhost:3000/mypage',
+    type:'GET',
+    headers: {'authorization': tok},
+    processData: false,
+    success:function(data){
+        $("#name").text(data.name);
+        $("#university").text(data.university);
+    }
+  })
+  return false;
+})
+    
+    
+ $(document).ready(function(){
+ var tok=localStorage.getItem('token');
+   $.ajax({
+     url:'http://localhost:3000/study/mine',
+     type:'GET',
+     dataType: 'json',
+     headers: {'authorization': tok},
+     success:function(result){
+       if(result.success==false){
+         $("#table").append("<center style='font-size:12px;'>개설한 스터디가 없습니다.</center>");
+       }
+       else{
+         for(var k in result.data){
+         $("#table").append(
+           "<tr id='"+result.data[k].study_id+"'><td><img src='img/logo2.png' class='rounded float-left'></td><td><dt>"+result.data[k].title
+           +"</dt>카테고리: "+result.data[k].category
+           +"<br>장소: "+result.data[k].place+"</td></tr>");
+         }
+       }
+     }
+   })
+   return false;
+ })
+
+ $(document).ready(function (){
+      $("#table").on("click","tr", function() {
+      localStorage.setItem("study_id", $(this).attr('id'));
+      window.location.href = 'study.html';
+    });
+});
+    
+      function ViewLayer(){
+     if(document.getElementById("Pop").style.display=="none"){
+        document.getElementById("Pop").style.display='inline'
+     }else{
+        document.getElementById("Pop").style.display='none'
+     }
+  }
+</script>
+</head>
+<body>
+  <div class="content">
+      <div style="background-color: #FFE4E1; height: auto;">
+        <img width="80px" height="80px" style="border-radius:40px; margin: 20px; float: right;" src="img/user.png" />
+        <div style="padding: 15px"><span id="name"></span><br>
+          <span id="university"></span><br>
+          <button type="button" class="btn btn-outline-secondary btn-sm">정보 수정</button><br><hr>
+        <span id="intro">안녕하세요. </span>
+       </div>
+     </div>
+     <div class="btn-group" role="group" aria-label="Basic example" style="width: 100%">
+       <button type="button" class="btn btn-outline-info" onClick="ViewLayer()">등록 글</button>
+       <button type="button" class="btn btn-outline-info">찜한 스터디</button>
+       <button type="button" class="btn btn-outline-info">승인 내역</button>
+     </div>
+</div>
+         <br>
+          <div id="Pop" style="position:absolute; width:100%; display:inline">
+                    <br>
+                    <table class="table" id="table"></table>
+                    </div>
+          
+
+          <ul id="nav">
+              <li class="active"><a href="#about" ><i class="far fa-user fa-2x"></i></a></li>
+              <li><a href="create.html" ><i class="fas fa-plus-circle fa-2x"></i></a></li>
+              <li><a href="search.html"><i class="fas fa-search fa-2x"></i></a></li>
+              <li><a href="home.html" ><i class="fas fa-home fa-2x"></i></a></li>
+          </ul>
+  <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+    </body>
+</html>

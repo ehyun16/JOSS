@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+      <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+ $(function(){
+  var sBtn = $("ul > li");
+  sBtn.find("a").click(function(){
+   sBtn.removeClass("active");
+   $(this).parent().addClass("active");
+  })
+ })
+</script>
+<title>search</title>
+
+<style type=text/css>
+    body{margin:0;}
+
+.navi> #nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #EFB9A7;
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+.navi li {
+    float: right;
+    margin:10px;
+    width:18.5%;
+}
+
+.navi li a {
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+
+    span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+   .pop{
+        background-color: #F9DDD1;
+        width:100%;
+    }
+    .pop .row{
+        line-height: 5%;
+    }
+    .pop .row1{
+        line-height:3%;
+    }
+
+.list ul li  {
+  display: inline-block;
+  margin-right:0;
+    margin-left: 0;
+}
+
+    #nav{
+      height: 50px;
+    }
+
+.navi > #nav > li > a > i{
+  color: white;
+}
+
+.navi > #nav > li.active >a >i {
+ color: #2F4F4F;
+}
+
+#table{
+  margin-bottom: 50px;
+}
+</style>
+<script>
+  function ViewLayer(){
+     //만일 Pop라는 녀석이 닫혀있다면??
+     if(document.getElementById("Pop").style.display=="none"){
+        //열어주어라
+        document.getElementById("Pop").style.display='inline'
+     //그렇지 않은 모든 경우라면??
+     }else{
+        //닫아주어라
+        document.getElementById("Pop").style.display='none'
+     }
+  }
+</script>
+<script type="text/javascript">
+function enterSearch() {
+    if(event.keyCode == 13){
+        myFunction();  // 실행할 이벤트
+    }
+}
+function myFunction() {
+    var x = document.getElementById("text").value;
+}
+</script>
+    </head>
+<body>
+<br>
+<br>
+
+<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h3 class="ui-title" role="heading" aria-level="1"><span style="font-size: 20px; color:#DB9D7A;">검색</span></h3>
+    <button style="font-size:15px; color:#DB9D7A" onClick="ViewLayer();">필터</button>
+   </div>
+
+           <div id="Pop" style="position:absolute; top:100px; width:100%; height:auto; z-index:1;display: none">
+            <div class="pop">
+              <br>
+                <span>&nbsp;카테고리</span>
+                <div class="row">
+            <span class="list label-new">
+                <ul class="ngc" style="padding: 15px">
+                    <li class="col-xs-2 borders">
+                        <input class="any" id="any" name="any" type="checkbox">
+                        <label id="any" for="any" style="font-size: 13px;">어학</label>
+                    </li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item1" name="item1" type="checkbox">
+                        <label id="item1" for="item1"  style="font-size: 13px;">자격증</label>
+                    </li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item2" name="item2" type="checkbox">
+                        <label id="item2" for="item2"  style="font-size: 13px;">취업</label>
+                    </li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item3" name="item3" type="checkbox">
+                        <label id="item3" for="item3"  style="font-size: 13px;">고시</label>
+                    </li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item4" name="item4" type="checkbox">
+                        <label id="item4" for="item4"  style="font-size: 13px;">프로그래밍</label>
+                    </li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item5" name="item5" type="checkbox">
+                        <label id="item5" for="item5"  style="font-size: 13px;">공모전</label>
+                    </li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item6" name="item6" type="checkbox">
+                        <label id="item6" for="item6"  style="font-size: 13px;">기타</label></li>
+                </ul>
+                    </span></div>
+                    <hr>
+              <span>&nbsp;지역</span>
+                <div class="row1">
+            <span class="list label-new">
+                     <ul class="ngc" style="padding: 15px">
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item7" name="item7" type="checkbox">
+                        <label id="item7" for="item7"  style="font-size: 13px;">서울</label></li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item8" name="item8" type="checkbox">
+                        <label id="item8" for="item8"  style="font-size: 13px;">인천</label></li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item9" name="item9" type="checkbox">
+                        <label id="item9" for="item9"  style="font-size: 13px;">경기</label></li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item10" name="item10" type="checkbox">
+                        <label id="item10" for="item10"  style="font-size: 13px;">대전</label></li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item11" name="item11" type="checkbox">
+                        <label id="item11" for="item11"  style="font-size: 13px;">대구</label></li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item12" name="item12" type="checkbox">
+                        <label id="item12" for="item12"  style="font-size: 13px;">부산</label></li>
+                    <li class="col-xs-2 borders new-select">
+                        <input id="item13" name="item13" type="checkbox">
+                        <label id="item13" for="item13"  style="font-size: 13px;">기타</label></li>
+                    </ul>
+                    </span>
+                    </div>
+                    <button onClick="ViewLayer();" style="font-size:17px; color:#DB9D7A;">저장하기</button>
+                </div>
+              </div>
+
+
+    <div class="search">
+          <!--  <input id=text type="text" class='input_text' name="search" onkeydown="enterSearch()" placeholder="검색어를 입력하세요."/>
+ <input type="button" class='sch_smit' value="검색" onclick="myFunction()"/>-->
+            <input type="search" name="search" id="search">
+        </div>
+
+<table class="table" id="table">
+  <tr><td><img src='img/logo2.png'></td>
+  <td><dt>안녕하세요</dt><br>
+    안녕<br>
+    안녕</td>
+</tr>
+  <tr>
+    <td><img src='img/logo2.png'></td>
+    <td><dt>안녕</dt><br>안녕<br>안녕</td>
+  </tr>
+  <tr>
+    <td><img src='img/logo2.png'></td>
+    <td><dt>안녕</dt><br>안녕<br>안녕</td>
+  </tr>
+  <tr>
+    <td><img src='img/logo2.png'></td>
+    <td><dt>안녕</dt><br>안녕<br>안녕</td>
+  </tr>
+</table>
+<div class="navi">
+<ul id="nav">
+  <li><a onclick="location.href='mypage.html'"><i class="far fa-user fa-2x"></i></a></li>
+  <li><a onclick="location.href='create.html'"><i class="fas fa-plus-circle fa-2x"></i></a></li>
+  <li class="active"><a href="#"><i class="fas fa-search fa-2x"></i></a></li>
+  <li><a onclick="location.href='home.html'"><i class="fas fa-home fa-2x"></i></a></li>
+</ul>
+</div>
+
+  <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+
+    </body>
+</html>
