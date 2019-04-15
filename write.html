@@ -7,9 +7,6 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-
-   <!--예제-->
-
    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -97,8 +94,6 @@ li a:hover {
 
         width:width:100%;
         height:45px;
-
-
         border:solid 5px #FAE0D4;
         border-left: 0;
         border-right: 0;
@@ -109,6 +104,43 @@ li a:hover {
     }
 
 </style>
+<script>
+$(document).ready(function(){
+  var Btn = $("#nav > li");
+  Btn.click(function(){
+  Btn.removeClass("active");
+   $(this).addClass("active");
+  })
+})
+
+$(document).ready(function(){
+  var tok=localStorage.getItem('token');
+  $('#create').on('click', function(){
+    var title=$('#title').val();
+    var category=$('#category').val();
+    var text=$('#text').val();
+
+    if(title==''|text==''){
+      $("#create_check").text("모든 항목을 입력해주세요");
+      $("#create_check").css('color', 'red');
+    }else{
+      $.ajax({
+        url:'http://localhost:3000/list',
+        type:'POST',
+        data: {title: title, category: category,text: text},
+        headers: {'authorization': tok},
+        success:function(data){
+          if(data=='success'){
+            alert('스터디 생성 완료')
+            window.location.href = 'list.html';
+          }
+        }
+      })
+      return false;
+    }
+  })
+})
+</script>
 </head>
 <body>
 <br>
@@ -120,67 +152,33 @@ li a:hover {
 <div class="backsavebtn">
 <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
       <h3 class="ui-title" role="heading" aria-level="1"><span style="font-size: 20px; color:#DB9D7A">게시글 등록</span></h3>
-    <!--<button type="button" onclick="location.href='home.html'"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>-->
+     <button type="button" onclick="history.back();"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>
       <a href="#" class="ui-link ui-btn-right ui-btn ui-shadow ui-corner-all" data-role="button" role="button">
           <span style="font-size:17px; color:#DB9D7A">등록</span></a>
    </div>
     </div>
 
-<!--
-<div data-role="content" data-id="footerid1" data-position="fixed">
-      <div data-role="navbar" >
-         <ul>
-            <li><a onclick="location.href='setting2.html'"><span>회원관리</span></a></li>
-            <li><a onclick="location.href='setting.html'"class="ui-btn-active ui-state-persist"><span>기본관리</span></a></li>
-         </ul>
-      </div>
-   </div>-->
-
-
-<fieldset>
-  <br>
-            <table>
-               <tr>
-                        <td><label for="s_id"><span>&nbsp제&nbsp목 : </span></label></td>
-                  <td><input type="text" name="s_id" id="s_id" disabled data-role="none"/></td>
-                    </tr>
-            </table>
-           
-
-     <span><span>&nbsp;게시판: </span></span><select data-role="none">
-        <option value="language"><span>&nbsp;자유게시판</span></option>
-        <option value="programming"><span>&nbsp;공지사항</span></option>
-         </select><br/>
-
-            <form action="" method="post" enctype="multipart/form-data" name="">
-                <input type="file" name="FileName">
-            </form>
-  <hr>
-   
-<!--
-    <span><span>&nbsp카테고리 : </span></span><select data-role="none">
-        <option value="language"><span>&nbsp언어</span></option>
-        <option value="programming"><span>&nbsp프로그래밍</span></option>
-        <option value="test"><span>&nbsp시험</span></option>
-            </select><br/>
-
-            <span>&nbsp희망지역 : </span><select data-role="none">
-            <option value="seoul">서울</option>
-            <option value="gyeonggi">경기</option>
-            </select><br/>
-
-            <span>&nbsp;희망 최대 인원 : </span><input type="number" name="s_year" min="1" max="100" value="3" data-role="none"/>
-                <div data-role="fieldcontain">
-                <hr>
-
-    ---------------------------------------->
-    <span>&nbsp; 내&nbsp;용 </span>
-             
-                 <textarea cols="25" rows="5" id="txtarea1"></textarea>
-                 
-    </fieldset>
-
-
+<form method='post'>
+          <br>
+           <label style="font-family: 'Do Hyeon', sans-serif;"><span>&nbsp;제&nbsp;목</span></label>
+            <input type="text" class="form-control form-control-sm" name="title" id="title" required autofocus><br>
+            <label style="font-family: 'Do Hyeon', sans-serif;"><span>카테고리</span></label>
+            <select id="category" class="custom-select">
+            <option value="자유게시판"><span>자유게시판</span></option>
+            <option value="공지사항"><span>공지사항</span></option>
+         </select>
+           <br>
+            <!-- <form action="" method="post" enctype="multipart/form-data" name="">
+                <input type="file" name="FileName"> -->
+           <label style="font-family: 'Do Hyeon', sans-serif;"><span>&nbsp;게시글 내용</span></label>
+            <textarea name="text" class="form-control form-control-sm" id="text" rows="4" cols="25"></textarea><br>
+    </form>
+      <br>
+<button id="create" type="button" class="btn btn-outline-info btn-block">완 료</button>
+    
+    
+    
+    
 <ul id="nav">
     <li><a onclick="location.href='setting.html'" ><i class="far fa-user fa-2x"></i></a></li>
     <li><a   class="active"  onclick="location.href='write.html'"><i class="fas fa-plus-circle fa-2x"></i></a></li>

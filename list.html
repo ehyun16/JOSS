@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+    <title>게시판 목록</title>
+
+    <!-- CSS 영역 -->
+<style>
+    #list{
+        background-color: #FAE0D4;
+        border:solid 1px #EFB9A7;
+        width:100%;
+        height:100%;
+        margin-top: 3px;
+    }
+    .backsavebtn{
+
+        width:100%;
+        height:40px;
+        border:solid 5px #FAE0D4;
+        border-left: 0;
+        border-right: 0;
+
+    }
+    
+        .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+     span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+    }
+        </style>
+
+
+    <!-- //CSS 영역 -->
+
+    <!-- 자바스크립트 영역 -->
+
+    <script type="text/javascript">
+
+        function goUrl(url) {
+
+           location.href=url;
+
+        }
+
+    </script>
+<br><br>
+   
+    <!-- //자바스크립트 영역 -->
+    </head>
+    <body>
+<div class="backsavebtn">
+<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h3 class="ui-title" role="heading" aria-level="1"><span id="title" style="font-size:20px; color:#DB9D7A">전체 게시물</span></h3>
+    <button type="button" onclick="history.back();"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>
+        <button type="button" id="connectButton" onclick="location.href='write.html'"><span style="font-size:16px; color:#DB9D7A">글쓰기</span></button>
+   </div>
+    </div>
+
+       <!-- //검색 폼 영역 -->
+
+       <!-- 게시판 목록 영역 -->
+
+       <table id="list" summary="게시판 목록">
+    
+           <colgroup>
+               <col width="40" />
+               <col width="200" />
+               <col width="60" />
+               <col width="60" />
+               <col width="60" />
+           </colgroup>  
+           <thead>
+               <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+               </tr>
+           </thead>
+           <tbody>
+           <tr>
+               <td align="center" colspan="5">
+               <hr>
+                <tr>
+               <th>1</th>
+               <th>안늉</th>
+               <th>이현이</th>
+               <th>4/15</th>
+               <th>3</th>
+               </tr>
+               
+               <tr>
+               <th>2</th>
+               <th>안눙</th>
+               <th>이현이</th>
+               <th>4/16</th>
+               <th>7</th>
+               </tr>
+   
+               <tr>
+               <th>3</th>
+               <th>안뇽</th>
+               <th>이현이</th>
+               <th>4/17</th>
+               <th>1</th>
+               </tr>
+ 
+               <tr>
+               <th>4</th>
+               <th>안농</th>
+               <th>이현이</th>
+               <th>4/18</th>
+               <th>2</th>
+               </tr>
+               
+               </td>
+          </tr>
+ 
+           </tbody>
+           
+           <tfoot>
+               <tr>
+                    <td align="center" colspan="5">1</td>
+               </tr>
+           </tfoot>
+       </table>
+
+       <!-- //게시판 목록 영역 -->
+
+       <!-- 버튼 영역 -->
+
+       <!-- //버튼 영역 -->
+         <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+
+    </body>
+
+    </html>
