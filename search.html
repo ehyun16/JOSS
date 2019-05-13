@@ -96,6 +96,21 @@
 #table{
   margin-bottom: 50px;
 }
+    
+        span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+        margin:10px;
+    }
+         .backsavebtn{
+
+        width:100%;
+        height:45px;
+        border:solid 5px #FAE0D4;
+        border-left: 0;
+        border-right: 0;
+
+    }
 </style>
 <script>
   function ViewLayer(){
@@ -124,12 +139,14 @@ function myFunction() {
 <body>
 <br>
 <br>
-
+<div class="backsavebtn">
 <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h3 class="ui-title" role="heading" aria-level="1"><span style="font-size: 20px; color:#DB9D7A;">검색</span></h3>
-    <button style="font-size:15px; color:#DB9D7A" onClick="ViewLayer();">필터</button>
-   </div>
-
+      <h3 class="ui-title" role="heading" aria-level="1"><span id="title" style="font-size: 22px; color:#DB9D7A">검색</span></h3>
+    <button type="button" onClick="ViewLayer();"><span style="font-size:16px; color:#DB9D7A">필터</span></button>
+    </div>
+    </div>
+          
+          
            <div id="Pop" style="position:absolute; top:100px; width:100%; height:auto; z-index:1;display: none">
             <div class="pop">
               <br>
@@ -198,7 +215,6 @@ function myFunction() {
                     <button onClick="ViewLayer();" style="font-size:17px; color:#DB9D7A;">저장하기</button>
                 </div>
               </div>
-
 
     <div class="search">
           <!--  <input id=text type="text" class='input_text' name="search" onkeydown="enterSearch()" placeholder="검색어를 입력하세요."/>

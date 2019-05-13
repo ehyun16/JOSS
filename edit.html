@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+		<title>main</title>
+<style type=text/css>
+    body{margin:0;}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #EFB9A7;
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+li {
+    float: right;
+    margin:10px;
+    width:18.5%;
+}
+
+li a {
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+
+    span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+        margin:10px;
+    }
+    #nav{
+      height: 50px;
+    }
+
+
+/*    .content{
+      top:45px;
+      width:100%;
+      position:fixed;
+      width:100%;
+    }
+*/
+ ul > li.active >a {
+  color: #2F4F4F;
+ }
+
+     .backsavebtn{
+
+        width:100%;
+        height:45px;
+        border:solid 5px #FAE0D4;
+        border-left: 0;
+        border-right: 0;
+
+    }
+ ul > li.active > a.ui-link{
+color: #2F4F4F;
+}
+ a.ui-link{
+  color: white;
+}
+
+#table{
+  margin-bottom: 50px;
+}
+    .text-box{
+        border: 2px solid #EFB9A7;
+        width: 100%;
+        height: 400px;
+    }
+</style>
+<script>
+  $(document).ready(function(){
+  var study_id=localStorage.getItem('write_id');
+  $.ajax({
+    url:'http://localhost:3000/study/detail?id='+write_id,
+    type:'GET',
+    processData: false,
+    success:function(data){
+      $('#title2').text(data.title2);
+      $('#category').text(data.category);
+      $('#text').text(data.text);
+    }
+  })
+  return false;
+});
+ 
+</script>
+</head>
+<body>
+<br>
+<br>
+<div class="backsavebtn">
+<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h3 class="ui-title" role="heading" aria-level="1"><span id="title" style="font-size: 20px; color:#DB9D7A"></span></h3>
+    <button type="button" onclick="history.back();"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>
+   </div>
+    </div>
+    
+    <div class="text-box">
+             <h3 class="ui-title" role="heading" aria-level="1"><span id="title2" style="font-size: 20px; color:#DB9D7A">여기 게시물 제목</span><hr></h3>
+        <table class="text" id="text">여기 게시물 내용<br> 밑에 1은 왜 안지워지지..뭐람</table>
+    </div>
+    
+    
+  <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+
+    </body>
+</html>

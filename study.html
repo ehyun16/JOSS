@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
+        <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,6 +10,7 @@
    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 
 		<title>study</title>
 <style>
@@ -24,7 +25,7 @@
     }
     span{
         font-family: 'Do Hyeon', sans-serif;
-        font-size: 20px;
+        font-size: 23px;
         margin:10px;
     }
     .name-box{
@@ -82,6 +83,7 @@
         width: 100%;
         text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     }
+
 </style>
 <script>
   $(document).ready(function(){
@@ -98,7 +100,39 @@
     }
   })
   return false;
-})
+});
+
+     $(document).ready(function(){
+ var tok=localStorage.getItem('token');
+   $.ajax({
+     url:'http://localhost:3000/study/mine',
+     type:'GET',
+     dataType: 'json',
+     headers: {'authorization': tok},
+     success:function(result){
+       if(result.success==false){
+         $("#table").append("<center style='font-size:12px;'>작성된 글이 없습니다.</center>");
+       }
+       else{
+         for(var k in result.data){
+         $("#table").append(
+           "<tr id='"+result.data[k].study_id+"'><td><img src='img/logo2.png' class='rounded float-left'></td><td><dt>"+result.data[k].title2
+           +"</dt>카테고리: "+result.data[k].category
+           +"<br>장소: "+result.data[k].place+"</td></tr>");
+         }
+       }
+     }
+   })
+   return false;
+ })
+
+ $(document).ready(function (){
+      $("#table").on("click","tr", function() {
+      localStorage.setItem("list_id", $(this).attr('id'));
+      window.location.href = 'edit.html';
+    });
+});
+    
 </script>
 </head>
 <body>
@@ -108,7 +142,7 @@
 <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
       <h3 class="ui-title" role="heading" aria-level="1"><span id="title" style="font-size: 20px; color:#DB9D7A"></span></h3>
     <button type="button" onclick="history.back();"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>
-    <button type="button" onclick="location.href='chatting.html'"><span style="font-size:16px; color:#DB9D7A">채팅</span></button>
+    <button type="button" id="connectButton" onclick="location.href='chatting.html'"><span style="font-size:16px; color:#DB9D7A">채팅</span></button>
    </div>
     </div>
 
@@ -123,18 +157,19 @@
     <div class="show-name"></div>
     </div>
 
-
-
-    <span style="color:#8B4B46">공지사항</span>
-<br>
-<br>
-<br>
-<br>
 <div class="board">
-    <span style="color:#8B4B46">전체글</span>
+    <span style="color:#8B4B46;" onclick="location.href='list.html'">전체글 /<span style="color:#8B4B46" onclick="location.href='list.html'">공지사항</span></span>
+             <div class="write">
+        <!--<i class="far fa-edit fa-2x"></i>-->
+        <input type="image" src="img/writebtn.png" onclick="location.href='write.html'" data-role="button" id="img">
+    </div>
+          <br>
+          <br>
+           <table class="table" id="list">
+           </table>
+           <span style="color:#8B4B46" onclick="location.href='edit.html'">게시물보기클릭</span>
      <!-- 이미지 버튼 삽입하기-->
       <!--아이콘을 버튼으로 만들자-->
-
 
     <!--<img src="images/main/btn_event_prev.gif" alt="이전 이벤트 보기" onclick="alert('이전');"/>-->
 
@@ -144,10 +179,7 @@
         <!--<button type="button" onclick="location.href='write.html'"><span style="font-size:16px; color:#DB9D7A">채팅</span></button>-->
   <!--  </div>-->
 
-    <div class="write">
-        <!--<i class="far fa-edit fa-2x"></i>-->
-        <input type="image" src="img/writebtn.png" onclick="location.href='write.html'" data-role="button">
-    </div>
+
 </div>
 
     <!-- <div data-role="content" data-id="footerid1" data-position="fixed">

@@ -1,0 +1,144 @@
+<!--마이페이지화면-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <title>replace</title>
+<style type=text/css>
+    body{margin:0;}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #EFB9A7;
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+li {
+    float: right;
+    margin:10px;
+    width:18.5%;
+}
+
+li a {
+  color: white;
+  padding: 10px 10px;
+  text-decoration: none;
+
+}
+
+    .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+
+    .content{
+      top:45px;
+      width:100%;
+      position:relative;
+    }
+
+ ul > li.active > a{
+  color: #2F4F4F;
+ }
+
+ #nav{
+   height: 50px;
+ }
+.list ul li  {
+  display: inline-block;
+  margin-right:0;
+    margin-left: 0;
+}
+
+.navi > #nav > li > a > i{
+  color: white;
+}
+
+.navi > #nav > li.active >a >i {
+ color: #2F4F4F;
+}
+
+         .backsavebtn{
+
+        width:100%;
+        height:45px;
+        border:solid 5px #FAE0D4;
+        border-left: 0;
+        border-right: 0;
+
+    }
+    
+        span{
+        font-family: 'Do Hyeon', sans-serif;
+        font-size: 20px;
+        margin:10px;
+    }
+</style>
+
+</head>
+<body>
+ <br><br>
+  <form>
+          <div class="backsavebtn">
+<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h3 class="ui-title" role="heading" aria-level="1"><span id="title" style="font-size: 20px; color:#DB9D7A">회원 정보 수정</span></h3>
+    <button type="button" onclick="history.back();"><span style="font-size:17px; color:#DB9D7A">뒤로</span></button>
+        <button type="button" onclick="submit();"><span style="font-size:17px; color:#DB9D7A">저장</span></button>
+   </div>
+    </div>
+           
+        
+            <div class="form-label-group">
+            <input type="text" name="uid" id="uid" class="form-control" placeholder="ID" required autofocus>
+            </div>
+            <div id="id_check" style="font-size:12px;"></div>
+            <div class="form-label-group">
+              <input type="password" name="pass1" id="pass1" class="form-control" placeholder="PW" >
+      </div>
+            <div class="form-label-group">
+            <input type="password" name="pass2" id="pass2" class="form-control" placeholder="PW 확인">
+            </div>
+            <div class="form-label-group">
+              <input type="text" name="nickname" id="nickname" class="form-control" placeholder="이름">
+            </div>
+            <div class="form-label-group">
+              <input type="email" name="email" id="email" class="form-control" placeholder="메일 주소">
+            </div>
+            <div class="form-label-group">
+              <input type="text" name="university" id="university" class="form-control" placeholder="대학명">
+            </div>
+            <div id="reg_check" style="font-size:12px;"></div>
+
+          </form>
+ 
+
+<div class="navi">
+<ul id="nav">
+  <li  class="active"><a onclick="location.href='mypage.html'"><i class="far fa-user fa-2x"></i></a></li>
+  <li><a onclick="location.href='create.html'"><i class="fas fa-plus-circle fa-2x"></i></a></li>
+  <li><a onclick="location.href='search.html'"><i class="fas fa-search fa-2x"></i></a></li>
+  <li><a onclick="location.href='home.html'"><i class="fas fa-home fa-2x"></i></a></li>
+</ul>
+</div>
+  <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+    </body>
+</html>

@@ -58,6 +58,19 @@ li a {
  #nav{
    height: 50px;
  }
+.list ul li  {
+  display: inline-block;
+  margin-right:0;
+    margin-left: 0;
+}
+
+.navi > #nav > li > a > i{
+  color: white;
+}
+
+.navi > #nav > li.active >a >i {
+ color: #2F4F4F;
+}
 
 </style>
 <script>
@@ -132,7 +145,7 @@ var tok=localStorage.getItem('token');
         <img width="80px" height="80px" style="border-radius:40px; margin: 20px; float: right;" src="img/user.png" />
         <div style="padding: 15px"><span id="name"></span><br>
           <span id="university"></span><br>
-          <button type="button" class="btn btn-outline-secondary btn-sm">정보 수정</button><br><hr>
+          <button type="button" onclick="location.href='replace.html'" class="btn btn-outline-secondary btn-sm">정보 수정</button><br><hr>
         <span id="intro">안녕하세요. </span>
        </div>
      </div>
@@ -148,13 +161,14 @@ var tok=localStorage.getItem('token');
                     <table class="table" id="table"></table>
                     </div>
           
-
-          <ul id="nav">
-              <li class="active"><a href="#about" ><i class="far fa-user fa-2x"></i></a></li>
-              <li><a href="create.html" ><i class="fas fa-plus-circle fa-2x"></i></a></li>
-              <li><a href="search.html"><i class="fas fa-search fa-2x"></i></a></li>
-              <li><a href="home.html" ><i class="fas fa-home fa-2x"></i></a></li>
-          </ul>
+<div class="navi">
+<ul id="nav">
+  <li  class="active"><a onclick="location.href='mypage.html'"><i class="far fa-user fa-2x"></i></a></li>
+  <li><a onclick="location.href='create.html'"><i class="fas fa-plus-circle fa-2x"></i></a></li>
+  <li><a onclick="location.href='search.html'"><i class="fas fa-search fa-2x"></i></a></li>
+  <li><a onclick="location.href='home.html'"><i class="fas fa-home fa-2x"></i></a></li>
+</ul>
+</div>
   <div class="box">
     <center><img src="img/logo2.png" style="height:45px;"></center>
   </div>

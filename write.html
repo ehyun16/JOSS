@@ -1,18 +1,16 @@
+<!--게시물 작성화면-->
 <!DOCTYPE html>
 <html>
     <head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width", initial-scale="1.0"/>
-
+		<meta name="viewport" content="width=device-width", initial-scale="1.0"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-      <title>set</title>
-<style>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+    <title>write</title>
+<style type=text/css>
     body{margin:0;}
 
 ul {
@@ -24,24 +22,18 @@ ul {
     position:fixed;
     bottom:0;
     width:100%;
-
 }
 
 li {
-    margin:10px;
     float: right;
-    width:18%;
+    margin:10px;
+    width:18.5%;
 }
 
 li a {
   color: white;
   padding: 10px 10px;
   text-decoration: none;
-
-}
-
-li a:hover {
-  background-color: #F9DDD1;
 
 }
 
@@ -52,57 +44,46 @@ li a:hover {
         position:fixed;
         top:0;
     }
-    span{
-        font-family: 'Do Hyeon', sans-serif;
-        font-size: 20px;
-    }
-    .name-box{
-        background-color: #FAE0D4;
-        width:80%;
-        height:70px;
 
-    }
-    .chat{
-        background-color: #F9DDD1;
-        width:100px;
-        height:53px;
-        float:right;
-        margin:10px;
-        text-align: center;
-        padding-top: 7px;
-        border-radius: 1.5em;
-        margin-right: 15px;
-    }
-    .board{
-        width:100%;
-        height:40px;
-        border:solid 5px #EFB9A7;
-        border-left: 0;
-        border-right: 0;
-    }
-    .write{
-        background-color: #F9DDD1;
-        width:40px;
-        height:30px;
-        float:right;
-        margin:5px;
-        text-align: center;
-        border-radius: 1em;
-        margin-right: 15px;
-    }
-    .backsavebtn{
+ ul > li.active > a{
+  color: #2F4F4F;
+ }
 
-        width:width:100%;
-        height:45px;
-        border:solid 5px #FAE0D4;
-        border-left: 0;
-        border-right: 0;
+ slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
 
-    }
-      a.ui-link{
-       color: white;
-    }
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  width: 100%; /* Full-width */
+  height: 10px; /* Specified height */
+  border-radius: 5px;
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
 
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #EFB9A7; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #EFB9A7; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -116,23 +97,23 @@ $(document).ready(function(){
 $(document).ready(function(){
   var tok=localStorage.getItem('token');
   $('#create').on('click', function(){
-    var title=$('#title').val();
+    var title=$('#title2').val();
     var category=$('#category').val();
     var text=$('#text').val();
 
-    if(title==''|text==''){
+    if(title2==''|text==''){
       $("#create_check").text("모든 항목을 입력해주세요");
       $("#create_check").css('color', 'red');
     }else{
       $.ajax({
         url:'http://localhost:3000/list',
         type:'POST',
-        data: {title: title, category: category,text: text},
+        data: {title: title, category: category, region: region, place: place, max: max, text: text},
         headers: {'authorization': tok},
         success:function(data){
           if(data=='success'){
-            alert('스터디 생성 완료')
-            window.location.href = 'list.html';
+            alert('게시물 등록 완료')
+            window.location.href = 'study.html';
           }
         }
       })
@@ -143,54 +124,44 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<br>
-<br>
-
-
-<!-- a 태그 버튼 -->
-
-<div class="backsavebtn">
-<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h3 class="ui-title" role="heading" aria-level="1"><span style="font-size: 20px; color:#DB9D7A">게시글 등록</span></h3>
-     <button type="button" onclick="history.back();"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>
-      <a href="#" class="ui-link ui-btn-right ui-btn ui-shadow ui-corner-all" data-role="button" role="button">
-          <span style="font-size:17px; color:#DB9D7A">등록</span></a>
-   </div>
-    </div>
-
-<form method='post'>
-          <br>
-           <label style="font-family: 'Do Hyeon', sans-serif;"><span>&nbsp;제&nbsp;목</span></label>
+<br><br>
+  <div style="margin: 0px 40px">
+    <div style="color:#8B4B46; font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin-top: 10px; margin-bottom: 5px;">
+      스터디 만들기
+    <input style="float: right" class="btn btn-outline-info" type=button value="닫기" onClick="history.back();">
+  </div><hr>
+    <form method="post">
+            <label style="font-family: 'Do Hyeon', sans-serif;">스터디명</label><br>
             <input type="text" class="form-control form-control-sm" name="title" id="title" required autofocus><br>
-            <label style="font-family: 'Do Hyeon', sans-serif;"><span>카테고리</span></label>
+            <label style="font-family: 'Do Hyeon', sans-serif;">카테고리</label><br>
             <select id="category" class="custom-select">
-            <option value="자유게시판"><span>자유게시판</span></option>
-            <option value="공지사항"><span>공지사항</span></option>
-         </select>
-           <br>
-            <!-- <form action="" method="post" enctype="multipart/form-data" name="">
-                <input type="file" name="FileName"> -->
-           <label style="font-family: 'Do Hyeon', sans-serif;"><span>&nbsp;게시글 내용</span></label>
+  	<option value="어학">자유게시판</option>
+    <option value="자격증">공지사항</option>
+
+  </select><br><br>
+            
+            <label style="font-family: 'Do Hyeon', sans-serif;">게시글 내용</label><br>
             <textarea name="text" class="form-control form-control-sm" id="text" rows="4" cols="25"></textarea><br>
-    </form>
+
+      </form>
+        <div id="create_check" style="font-size:12px;"></div>
       <br>
 <button id="create" type="button" class="btn btn-outline-info btn-block">완 료</button>
-    
-    
-    
-    
-<ul id="nav">
-    <li><a onclick="location.href='setting.html'" ><i class="far fa-user fa-2x"></i></a></li>
-    <li><a   class="active"  onclick="location.href='write.html'"><i class="fas fa-plus-circle fa-2x"></i></a></li>
-    <li><a onclick="location.href='search.html'"><i class="fas fa-search fa-2x"></i></a></li>
-    <li><a onclick="location.href='home.html'"><i class="fas fa-home fa-2x"></i></a></li>
-</ul>
-
-  <div class="box">
-    <center><img src="img/logo2.png" style="height:45px;"></center>
+<br><br>
   </div>
 
+  <div class="box">
+  <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+  <script>
+  var slider = document.getElementById("max");
+  var output = document.getElementById("demo");
+  output.innerHTML = slider.value; // Display the default slider value
 
-
+  // Update the current slider value (each time you drag the slider handle)
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+  }
+  </script>
     </body>
 </html>

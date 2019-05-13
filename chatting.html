@@ -1,65 +1,173 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Socket.io Chat Example</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-  <div class="container">
-    <h3>Socket.io Chat Example</h3>
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="msgForm">Message: </label>
-        <input type="text" class="form-control" id="msgForm">
-      </div>
-      <button type="submit" class="btn btn-primary">Send</button>
-    </form>
-    <div id="chatLogs"></div>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-  $(function(){
-    // socket.io 서버에 접속한다
-    var socket = io();
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width", initial-scale="1.0"/>
+       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 
-    // 서버로 자신의 정보를 전송한다.
-    socket.emit("login", {
-      // name: "ungmo2",
-      name: makeRandomName(),
-      userid: "ungmo2@gmail.com"
-    });
 
-    // 서버로부터의 메시지가 수신되면
-    socket.on("login", function(data) {
-      $("#chatLogs").append("<div><strong>" + data + "</strong> has joined</div>");
-    });
 
-    // 서버로부터의 메시지가 수신되면
-    socket.on("chat", function(data) {
-      $("#chatLogs").append("<div>" + data.msg + " : from <strong>" + data.from.name + "</strong></div>");
-    });
-
-    // Send 버튼이 클릭되면
-    $("form").submit(function(e) {
-      e.preventDefault();
-      var $msgForm = $("#msgForm");
-
-      // 서버로 메시지를 전송한다.
-      socket.emit("chat", { msg: $msgForm.val() });
-      $msgForm.val("");
-    });
-
-    function makeRandomName(){
-      var name = "";
-      var possible = "abcdefghijklmnopqrstuvwxyz";
-      for( var i = 0; i < 3; i++ ) {
-        name += possible.charAt(Math.floor(Math.random() * possible.length));
-      }
-      return name;
+    <title>채팅</title>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script src="/js/chatting.js"></script>
+   
+      <script>
+  $(document).ready(function(){
+  var study_id=localStorage.getItem('message');
+  $.ajax({
+    url:'http://localhost:3000/study/detail/chatting?id='+message,
+    type:'GET',
+    processData: false,
+    success:function(data){
+      $('#pmessage').text(data.pmessage);
+      $('#gmessage').text(data.gmessage);
     }
-  });
-  </script>
-</body>
+  })
+  return false;
+})
+</script>
+     
+      <script>
+      var host;
+      var port;
+      var socket;
+      
+        $(function(){
+            $("#connectButton").bind('click', function(event){
+            host=$('#hostInput').val();
+            port=$('#portInput').val();
+            
+            connectToServer();
+           });
+        });
+        
+        function connectToServer(){
+            
+            var options = {'forceNew':true};
+            var url='http://'+host+':'+port;
+            socket=io.connect(url, options);
+            
+            socket.on('connect', function(){
+                println('웹소켓 연결'+url);
+            });
+            
+            socket.on('disconnect', function(){
+                println('웹소켓 종료');
+            });
+        }
+           
+</script>
+      <style>
+          *{
+      font-family: 'Do Hyeon', sans-serif;
+      font-size: 18px;
+    }
+      /* 메인 */
+      #main {
+        margin: auto;
+        margin-top: 17px;
+        border-radius: 20px;
+        background-color: #F9DDD1;
+        text-align: center;
+        width: auto;
+        height: 640px;
+      }
+
+      /* 채팅 영역 */
+      #chat {
+        height:70%;
+        width: 100%;
+        overflow-y: auto;
+      }
+
+      /* 접속 알림 */
+      .connect {
+        width: 90%;
+        margin: auto;
+        background-color: #EFB9A7;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* 접속 종료 알림 */
+      .disconnect {
+        width: 90%;
+        margin: auto;
+        background-color: indianred;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* 내가 보낸 메시지 */
+      .me {
+        width: auto;
+        height:auto;
+        margin: auto;
+        background-color: lightblue ;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-left: 170px;
+        text-align:center;
+
+        }
+
+      /* 상대방이 보낸 메시지 */
+      .other {
+        width: auto;
+        height: auto;
+        margin: auto;
+        background-color: white;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-right: 170px;
+        text-align:center;
+      }
+
+     .backsavebtn{
+
+        width:100%;
+        height:45px;
+        border:solid 5px #FAE0D4;
+        border-left: 0;
+        border-right: 0;
+
+    }
+              .box{
+        background-color: #EFB9A7;
+        width:100%;
+        height:45px;
+        position:fixed;
+        top:0;
+    }
+      </style>
+  </head>
+  <body>
+   <br>
+    <div id="main">
+    <div class="backsavebtn">
+<div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+         <h3 class="ui-title" role="heading" aria-level="1"><span id="title" style="font-size: 18px; color:#DB9D7A; margin-top: 10px;">스터디 채팅</span></h3>
+    <button type="button" onclick="history.back();"><span style="font-size:15px; color:#DB9D7A">뒤로</span></button>
+   </div>
+        </div>
+
+      <div id="chat">
+        <!-- 채팅 메시지 영역 -->
+      </div>
+      <div>
+        <input type="text" id="test" style="width: 80%;" placeholder="메시지를 입력해주세요..">
+        <button onclick="send()">전송</button>
+      </div>
+    </div>
+      <div class="box">
+    <center><img src="img/logo2.png" style="height:45px;"></center>
+  </div>
+  </body>
 </html>
