@@ -14,7 +14,7 @@ var login = require('./routes/login');
 var mypage = require('./routes/mypage');
 var findaccount = require('./routes/findaccount');
 var study = require('./routes/study');
-
+var write = require('./routes/write');
 
 var app = express();
 
@@ -56,6 +56,7 @@ app.use('/login', login);
 app.use('/mypage', mypage);
 app.use('/findaccount', findaccount);
 app.use('/study', study);
+app.use('/write', write);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,14 +73,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-io.on('connection', (socket) => {
-  socket.on('disconnect', () => {
-    console.log('disconnected');
-  });
-});
-
-
-
 
 module.exports = app;
